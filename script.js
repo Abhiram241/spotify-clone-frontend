@@ -1,7 +1,7 @@
 console.log("I love you 3000");
 let folder_name = "My_Picks-My_fav_songs";
 let current_song = new Audio(
-  `http://192.168.1.3:3000/spotify_clone/songs/${folder_name}/Bye%20Bye%20Bye.mp3`
+  `/spotify_clone/songs/${folder_name}/Bye%20Bye%20Bye.mp3`
 );
 let current_song_index = 1;
 let current_playlist = "My Picks";
@@ -9,7 +9,7 @@ document.querySelector(".songinfo").innerHTML = `Bye Bye Bye - Mystery Guy`;
 document.querySelector(".songtime").innerHTML = "00:00/03:20";
 
 async function getPlaylists() {
-  let p = await fetch(`http://192.168.1.3:3000/spotify_clone/songs/`);
+  let p = await fetch(`/spotify_clone/songs/`);
   let response = await p.text();
 
   let div = document.createElement("div");
@@ -39,7 +39,7 @@ async function getPlaylists() {
       .split("-")[1];
     //fetch the image url
     let image_process = await fetch(
-      `http://192.168.1.3:3000/spotify_clone/songs/${og_pname}`
+      `/spotify_clone/songs/${og_pname}`
     );
 
     let img_resp = await image_process.text();
@@ -65,7 +65,7 @@ async function getPlaylists() {
 
 async function getSongs(folder_name) {
   let a = await fetch(
-    `http://192.168.1.3:3000/spotify_clone/songs/${folder_name}/`
+    `/spotify_clone/songs/${folder_name}/`
   );
   // fetch api is a basic way of fetch content from a link
   let response = await a.text();
