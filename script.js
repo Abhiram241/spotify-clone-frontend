@@ -1,15 +1,15 @@
 console.log("I love you 3000");
 let folder_name = "My_Picks-My_fav_songs";
 let current_song = new Audio(
-  `http://127.0.0.1:3000/spotify_clone/songs/${folder_name}/Bye%20Bye%20Bye.mp3`
+  `http://127.0.0.1:3000/songs/${folder_name}/Dreamer%20-%20Alan%20Walker.mp3`
 );
 let current_song_index = 1;
 let current_playlist = "My Picks";
-document.querySelector(".songinfo").innerHTML = `Bye Bye Bye - Mystery Guy`;
-document.querySelector(".songtime").innerHTML = "00:00/03:20";
+document.querySelector(".songinfo").innerHTML = `Dreamer - Alan Walker`;
+document.querySelector(".songtime").innerHTML = "00:00/02:35";
 
 async function getPlaylists() {
-  let p = await fetch(`http://127.0.0.1:3000/spotify_clone/songs/`);
+  let p = await fetch(`http://127.0.0.1:3000/songs/`);
   let response = await p.text();
 
   let div = document.createElement("div");
@@ -24,23 +24,21 @@ async function getPlaylists() {
 
   for (let i = 1; i < links.length; i++) {
     let pname = links[i].href;
-    let og_pname = pname.split(`/spotify_clone/songs/`)[1];
+    let og_pname = pname.split(`/songs/`)[1];
     let p_name = pname
-      .split(`/spotify_clone/songs/`)[1]
+      .split(`/songs/`)[1]
       .replaceAll("%20", " ")
       .replaceAll("_", " ")
       .replace(/.$/, "")
       .split("-")[0];
     let p_des = pname
-      .split(`/spotify_clone/songs/`)[1]
+      .split(`/songs/`)[1]
       .replaceAll("%20", " ")
       .replaceAll("_", " ")
       .replace(/.$/, "")
       .split("-")[1];
     //fetch the image url
-    let image_process = await fetch(
-      `http://127.0.0.1:3000/spotify_clone/songs/${og_pname}`
-    );
+    let image_process = await fetch(`http://127.0.0.1:3000/songs/${og_pname}`);
 
     let img_resp = await image_process.text();
     let div = document.createElement("div");
@@ -64,9 +62,7 @@ async function getPlaylists() {
 }
 
 async function getSongs(folder_name) {
-  let a = await fetch(
-    `http://127.0.0.1:3000/spotify_clone/songs/${folder_name}/`
-  );
+  let a = await fetch(`http://127.0.0.1:3000/songs/${folder_name}/`);
   // fetch api is a basic way of fetch content from a link
   let response = await a.text();
   let div = document.createElement("div");
@@ -80,7 +76,7 @@ async function getSongs(folder_name) {
     if (element.href.endsWith(".mp3")) {
       songs.push(
         element.href
-          .split(`/spotify_clone/songs/${folder_name}/`)[1]
+          .split(`/songs/${folder_name}/`)[1]
           .replaceAll("%20", " ")
           .replace(".mp3", "")
       );
@@ -104,10 +100,7 @@ const playMusic = (songs, index) => {
   }
 
   let the_link =
-    `/spotify_clone/songs/${folder_name}/${songs[index].replaceAll(
-      " ",
-      "%20"
-    )}` + ".mp3";
+    `/songs/${folder_name}/${songs[index].replaceAll(" ", "%20")}` + ".mp3";
 
   current_song.src = the_link;
   current_song.play();
