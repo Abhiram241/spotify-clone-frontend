@@ -1,7 +1,7 @@
 console.log("I love you 3000");
 let folder_name = "My_Picks-My_fav_songs";
 let current_song = new Audio(
-  `https://abhiram241.github.io/spotify-clone-frontend/songs/${folder_name}/Dreamer%20-%20Alan%20Walker.mp3`
+  `http://127.0.0.1:3000/songs/${folder_name}/Dreamer%20-%20Alan%20Walker.mp3`
 );
 let current_song_index = 1;
 let current_playlist = "My Picks";
@@ -9,9 +9,7 @@ document.querySelector(".songinfo").innerHTML = `Dreamer - Alan Walker`;
 document.querySelector(".songtime").innerHTML = "00:00/02:35";
 
 async function getPlaylists() {
-  let p = await fetch(
-    `https://abhiram241.github.io/spotify-clone-frontend/songs/`
-  );
+  let p = await fetch(`http://127.0.0.1:3000/songs/`);
   let response = await p.text();
 
   let div = document.createElement("div");
@@ -40,9 +38,7 @@ async function getPlaylists() {
       .replace(/.$/, "")
       .split("-")[1];
     //fetch the image url
-    let image_process = await fetch(
-      `https://abhiram241.github.io/spotify-clone-frontend/songs/${og_pname}`
-    );
+    let image_process = await fetch(`http://127.0.0.1:3000/songs/${og_pname}`);
 
     let img_resp = await image_process.text();
     let div = document.createElement("div");
@@ -66,9 +62,7 @@ async function getPlaylists() {
 }
 
 async function getSongs(folder_name) {
-  let a = await fetch(
-    `https://abhiram241.github.io/spotify-clone-frontend/songs/${folder_name}/`
-  );
+  let a = await fetch(`http://127.0.0.1:3000/songs/${folder_name}/`);
   // fetch api is a basic way of fetch content from a link
   let response = await a.text();
   let div = document.createElement("div");
